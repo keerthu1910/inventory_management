@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/axios";
 import { ProductContext } from "../context/Productcontext";
 
 export const Productprovider = ({ children }) => {
@@ -8,7 +8,7 @@ export const Productprovider = ({ children }) => {
   const [error, setError] = useState(null);
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/products");
+      const response = await api.get("api/products");
       setProducts(response.data.data);
     } catch (error) {
       setError(error);

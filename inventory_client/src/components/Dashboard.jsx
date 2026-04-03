@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../context/Productcontext";
-import axios from "axios";
+import api from "../api/axios";
 import { Stockgraph } from "./Stockgraph";
 
 export const Dashboard = () => {
@@ -11,14 +11,14 @@ export const Dashboard = () => {
   const [latestProducts, setLatestProducts] = useState([]);
 
   const fetchLatestProducts = async () => {
-    const response = await axios.get("http://localhost:3000/api/products", {
+    const response = await api.get("api/products", {
       params: { sort: "createdAt", order: "desc", limit: 5 },
     });
     setLatestProducts(response.data.data);
   };
 
   const calculateStock = async () => {
-    const stockDetails = await axios.get("http://localhost:3000/api/stock");
+    const stockDetails = await api.get("api/stock");
     setLowStock(stockDetails.data.data.lowstock);
     setTotalProducts(stockDetails.data.data.totalCategories);
     setTotalStock(stockDetails.data.data.totalProducts);

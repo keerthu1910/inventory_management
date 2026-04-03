@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import axios from "axios";
+import api from "../api/axios";
 
 export const Productmodal = () => {
   const [showModal, setShowModal] = useState(true);
@@ -26,12 +26,9 @@ export const Productmodal = () => {
       toast.error("Please fill in all details", { theme: "colored" });
     } else {
       try {
-        const response = await axios.put(
-          `http://localhost:3000/api/products/${updateId}`,
-          {
-            data: newproduct,
-          },
-        );
+        const response = await api.put(`api/products/${updateId}`, {
+          data: newproduct,
+        });
         if (response.status === 200) {
           toast.success("Product updated successfully", { theme: "colored" });
         }
@@ -54,12 +51,9 @@ export const Productmodal = () => {
       toast.error("Please fill in all details", { theme: "colored" });
     } else {
       try {
-        const response = await axios.post(
-          "http://localhost:3000/api/products",
-          {
-            data: newproduct,
-          },
-        );
+        const response = await api.post("api/products", {
+          data: newproduct,
+        });
         if (response.status === 200) {
           toast.success("Product entered successfully", { theme: "colored" });
         }

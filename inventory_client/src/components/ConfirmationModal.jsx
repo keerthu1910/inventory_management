@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api/axios";
 import { toast } from "react-toastify";
 
 export const ConfirmationModal = () => {
@@ -10,9 +10,7 @@ export const ConfirmationModal = () => {
   const productId = location.state.id;
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(
-        `http://localhost:3000/api/products/${productId}`,
-      );
+      const response = await api.delete(`api/products/${productId}`);
       if (response.status === 200) {
         toast.success("Product deleted successfully", { theme: "colored" });
       }

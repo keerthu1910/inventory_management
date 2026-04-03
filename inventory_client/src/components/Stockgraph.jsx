@@ -1,5 +1,6 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../context/Productcontext";
+import api from "../api/axios";
 import {
   BarChart,
   XAxis,
@@ -13,26 +14,23 @@ import {
 } from "recharts";
 
 export const Stockgraph = () => {
-  const { products } = useContext(ProductContext);
-  const stockStats = Object.values(
-    products.reduce((acc, curr) => {
-      if (!acc[curr.category]) {
-        acc[curr.category] = {
-          category: curr.category,
-          quantity: curr.quantity,
-        };
-      } else {
-        acc[curr.category].quantity += curr.quantity;
-      }
-      return acc;
-    }, []),
-  );
+  const { fetchProducts } = useContext(ProductContext);
+  const [stats, setStats] = useState([]);
+  const getStats = async () => {
+    const results = await api.get("api/stock/stats");
+    setStats(results.data.data);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+    getStats();
+  }, []);
 
   return (
     <>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart
-          data={stockStats}
+          data={stats}
           margin={{
             top: 20,
             right: 30,
@@ -49,7 +47,7 @@ export const Stockgraph = () => {
           <YAxis tickLine={false} axisLine={false} />
           <Tooltip />
           <Bar dataKey="quantity" radius={[4, 4, 0, 0]} barSize={8}>
-            {stockStats.map((entry, index) => (
+            {stats.map((entry, index) => (
               <Cell key={`cell-${index}`} fill="#064E3B" />
             ))}
           </Bar>
