@@ -23,6 +23,23 @@ class ProductService {
     return products;
   };
 
+  searchProduct = async (searchvalue, category, lowstock) => {
+    let query = {};
+    const lowstockBool = lowstock === "true";
+    if (searchvalue) {
+      query.name = { $regex: searchvalue, $options: "i" };
+    }
+    if (category && category !== "all") {
+      query.category = category;
+    }
+    if (lowstockBool) {
+      query.quantity = { $lt: 15 };
+    }
+    const products = await Product.find(query);
+    console.log(products);
+    return products;
+  };
+
   updateProduct = async (product) => {
     const updatedProduct = await Product.findByIdAndUpdate(
       product.id,

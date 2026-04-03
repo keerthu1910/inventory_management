@@ -49,6 +49,27 @@ class ProductController {
     }
   };
 
+  searchProduct = async (req, res) => {
+    const { searchvalue = "", category = "all", lowstock = false } = req.query;
+    console.log(searchvalue);
+
+    try {
+      const productData = await this.productService.searchProduct(
+        searchvalue,
+        category,
+        lowstock,
+      );
+      return res.status(200).json({
+        message: "products fetched successfully",
+        data: productData,
+      });
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({
+        message: error.message,
+      });
+    }
+  };
+
   updateProduct = async (req, res) => {
     const product_id = req.params.id;
     const product_details = req.body.data;
