@@ -35,6 +35,25 @@ class StockService {
       totalProducts: productCount,
     };
   };
+
+  getStockStats = async () => {
+    const statistics = await Product.aggregate([
+      {
+        $group: {
+          _id: "$category",
+          quantity: { $sum: "$quantity" },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          category: "$_id",
+          quantity: "$quantity",
+        },
+      },
+    ]);
+    return statistics;
+  };
 }
 
 export default StockService;

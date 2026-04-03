@@ -15,6 +15,17 @@ class StockController {
       });
     }
   };
+
+  getStockStats = async (req, res) => {
+    try {
+      const response = await this.stockService.getStockStats();
+      return res.status(200).json({ data: response });
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({
+        message: error.message,
+      });
+    }
+  };
 }
 
 export default StockController;
