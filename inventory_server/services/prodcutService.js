@@ -14,10 +14,12 @@ class ProductService {
     return product;
   };
 
-  getAllProducts = async (sort, order, limit) => {
+  getAllProducts = async (sort, order, limit, page) => {
     const sortOrder = order === "desc" ? -1 : 1;
+    const skipIndex = (page - 1) * limit;
     const products = await Product.find()
       .sort({ [sort]: sortOrder })
+      .skip(skipIndex)
       .limit(Number(limit));
 
     return products;

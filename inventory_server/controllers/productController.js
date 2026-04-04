@@ -30,13 +30,19 @@ class ProductController {
   };
 
   getAllProducts = async (req, res) => {
-    const { sort = "createdAt", order = "desc", limit = 10 } = req.query;
+    const {
+      sort = "createdAt",
+      order = "desc",
+      limit = 10,
+      page = 1,
+    } = req.query;
 
     try {
       const productData = await this.productService.getAllProducts(
         sort,
         order,
         limit,
+        page,
       );
       return res.status(200).json({
         message: "products fetched successfully",
