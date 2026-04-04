@@ -6,7 +6,8 @@ import dayjs from "dayjs";
 import { ProductContext } from "../context/Productcontext";
 
 export const Products = () => {
-  const { products, fetchProducts } = useContext(ProductContext);
+  const { products, fetchProducts, pageIncrement, pageDecrement } =
+    useContext(ProductContext);
   const [searchedProducts, setSearchedProducts] = useState([]);
   const [searchvalue, setSearchValue] = useState("");
   const [lowstock, setLowStock] = useState(false);
@@ -139,6 +140,20 @@ export const Products = () => {
             )}
           </tbody>
         </table>
+        <div className="flex justify-between tems-center">
+          <button
+            className="p-3 rounded-md bg-red-600 text-white"
+            onClick={pageDecrement}
+          >
+            Prev
+          </button>
+          <button
+            className="p-3 rounded-md bg-red-600 text-white"
+            onClick={pageIncrement}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
