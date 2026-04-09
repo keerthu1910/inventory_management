@@ -46,7 +46,9 @@ class ProductController {
       );
       return res.status(200).json({
         message: "products fetched successfully",
-        data: productData,
+        data: productData.products,
+        limit: limit,
+        total: productData.count,
       });
     } catch (error) {
       return res.status(error.statusCode || 500).json({

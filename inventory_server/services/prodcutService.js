@@ -15,6 +15,7 @@ class ProductService {
   };
 
   getAllProducts = async (sort, order, limit, page) => {
+    const totalProductCount = await Product.countDocuments({});
     const sortOrder = order === "desc" ? -1 : 1;
     const skipIndex = (page - 1) * limit;
     const products = await Product.find()
@@ -22,7 +23,7 @@ class ProductService {
       .skip(skipIndex)
       .limit(Number(limit));
 
-    return products;
+    return { products: products, count: totalProductCount };
   };
 
   searchProduct = async (searchvalue, category, lowstock) => {
