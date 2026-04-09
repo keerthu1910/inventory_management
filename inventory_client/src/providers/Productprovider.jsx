@@ -7,8 +7,15 @@ export const Productprovider = ({ children }) => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [limit, setLimit] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
   const pageIncrement = () => {
-    setPage((page) => page + 1);
+    const totalPages = Math.ceil(totalProducts / limit);
+    if (page >= totalPages) {
+      setPage(page);
+    } else {
+      setPage((page) => page + 1);
+    }
   };
   const pageDecrement = () => {
     if (page === 1) {
@@ -19,10 +26,12 @@ export const Productprovider = ({ children }) => {
   };
   const fetchProducts = async () => {
     try {
-      const response = await api.get("api/products", {
+      const response = await api.get("/products", {
         params: { page: page },
       });
       setProducts(response.data.data);
+      setLimit(response.data.limit);
+      setTotalProducts(response.data.total);
     } catch (error) {
       setError(error);
     } finally {
@@ -42,6 +51,8 @@ export const Productprovider = ({ children }) => {
         products,
         loading,
         error,
+        page,
+        limit,
         fetchProducts,
         pageIncrement,
         pageDecrement,
