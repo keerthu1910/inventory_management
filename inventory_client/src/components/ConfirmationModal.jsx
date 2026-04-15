@@ -39,7 +39,7 @@ export const ConfirmationModal = () => {
         }}
       >
         <div
-          className="bg-white w-[30%] h-[30%] rounded-lg p-3 flex flex-col justify-between"
+          className="bg-white min-w-[100px] h-[20%] m-3 rounded-lg p-3 flex flex-col justify-between"
           onClick={(e) => e.stopPropagation()}
         >
           <p className="text-black font-bold text-xl">Delete Confirmation</p>

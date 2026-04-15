@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Dashboard } from "./components/Dashboard";
 import { Products } from "./components/Products";
-import { DashboardLayout } from "./layouts/Dashboardlayout";
+import { DashboardLayout } from "./layouts/DashboardLayout";
 import { Productmodal } from "./components/Productmodal";
 import { ConfirmationModal } from "./components/ConfirmationModal";
 

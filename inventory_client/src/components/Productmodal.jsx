@@ -95,7 +95,7 @@ export const Productmodal = () => {
         }}
       >
         <div
-          className="w-[50%] bg-white rounded-lg p-4"
+          className="max-w-[90%] min-w-[60%] bg-white rounded-lg p-4"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="p-3 grid grid-cols-2 gap-2 bg-gray-300 rounded-sm items-center my-1">

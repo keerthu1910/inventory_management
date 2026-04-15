@@ -33,28 +33,28 @@ export const Dashboard = () => {
   if (error) return <div>Unable to fetch Data</div>;
 
   return (
-    <>
-      <div className="flex flex-col mx-5 m-5">
+    <div className="flex flex-col md:flex-col lg:flex-row gap-5 p-6">
+      <div className="flex-1 max-w-[900px]">
         <p className="font-bold text-2xl">Products Overview</p>
-        <div className="flex gap-5 items-center justify-center">
-          <div className="my-5 bg-white w-44 h-28">
+        <div className=" grid grid-cols-1 md:flex md:items-center gap-1 mt-2">
+          <div className="flex flex-row md:flex-col md:items-start items-center justify-between min-w-[300px] bg-gray-200 rounded-lg lg:bg-white lg:min-w-[150px] md:bg-white md:min-w-[150px]">
             <div className=" flex gap-2 items-center p-3">
               <span className="inline-block bg-green-800 w-3 h-3 rounded-full"></span>
               <p className="text-gray-500 font-medium">Product Types</p>
             </div>
             <p className="font-bold text-2xl p-3">{totalProducts}</p>
           </div>
-          <div className="flex items-center justify-center h-15 w-px bg-gray-300"></div>
-          <div className="my-5 bg-white w-44 h-28">
+          <div className="hidden md:flex lg:flex items-center justify-center h-15 w-px bg-gray-300"></div>
+          <div className="flex flex-row md:flex-col md:items-start items-center justify-between min-w-[300px] bg-gray-200 rounded-lg md:bg-white lg:bg-white lg:min-w-[150px] md:min-w-[150px]">
             <div className=" flex gap-2 items-center p-3">
               <span className="inline-block bg-red-800 w-3 h-3 rounded-full"></span>
               <p className="text-gray-500 font-medium">Low Stock</p>
             </div>
             <p className="font-bold text-2xl p-3">{lowStock}</p>
           </div>
-          <div className="flex items-center justify-center h-15 w-px bg-gray-300"></div>
+          <div className="hidden md:flex lg:flex items-center justify-center h-15 w-px bg-gray-300"></div>
 
-          <div className="my-5 bg-white w-44 h-28">
+          <div className="flex flex-row md:flex-col md:items-start items-center justify-between min-w-[300px] bg-gray-200 rounded-lg md:bg-white lg:bg-white lg:min-w-[150px] md:min-w-[150px]">
             <div className=" flex gap-2 items-center p-3">
               <span className="inline-block bg-green-800 w-3 h-3 rounded-full"></span>
               <p className="text-gray-500 font-medium">Total Quantity</p>
@@ -62,9 +62,11 @@ export const Dashboard = () => {
             <p className="font-bold text-2xl p-3">{totalStock}</p>
           </div>
         </div>
-        <Stockgraph />
+        <div className="w-full max-w-[900px]">
+          <Stockgraph />
+        </div>
       </div>
-      <div className="w-[30%] bg-gray-200 rounded-lg mx-5 my-5">
+      <div className="min-w-[300px] bg-gray-200 rounded-lg my-5">
         <p className="font-bold text-2xl mx-5 my-5 text-center">
           Newly Added Stock Items
         </p>
@@ -78,6 +80,6 @@ export const Dashboard = () => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };

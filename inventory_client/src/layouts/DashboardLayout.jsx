@@ -15,7 +15,9 @@ export const DashboardLayout = () => {
       <Navbar showMenu={isSidebarOpen} toggleMenu={toggleMenu} />
       <div className="flex flex-1 w-full">
         <Sidebar showMenu={isSidebarOpen} toggleMenu={toggleMenu} />
-        <Outlet />
+        <div className="flex-1">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

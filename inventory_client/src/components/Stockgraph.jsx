@@ -27,14 +27,14 @@ export const Stockgraph = () => {
   }, []);
 
   return (
-    <>
+    <div className="hidden lg:block md:block">
       <ResponsiveContainer width="100%" height={300}>
         <BarChart
           data={stats}
           margin={{
             top: 20,
-            right: 30,
-            left: 20,
+            right: 10,
+            left: 0,
             bottom: 5,
           }}
         >
@@ -53,6 +53,6 @@ export const Stockgraph = () => {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-    </>
+    </div>
   );
 };
