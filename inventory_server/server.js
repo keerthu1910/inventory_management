@@ -14,6 +14,6 @@ mongoDB();
 app.use("/api", productRoutes);
 app.use("/api", stockRoutes);
 
-app.listen(port, (req, res) => {
+app.listen(port, "0.0.0.0", (req, res) => {
   console.log(`server running in port ${port} `);
 });
